@@ -20,7 +20,8 @@ if dev.is_kernel_driver_active(0):
 #usb.util.claim_interface(dev, 0)
 
 # knock into tablet mode
-payload = '\x05\x00\x03'
+#payload = '\x05\x00\x03'
+payload = bytes.fromhex('050003')
 while True:
     try:
         assert dev.ctrl_transfer(0x21, 0x09, 0x0305, 1, payload, 100) == len(payload)
@@ -42,7 +43,8 @@ minypos = 0
 maxxpos = 19780
 maxypos = 13442
 minpressure = 0
-maxpressure = 255
+#maxpressure = 255
+maxpressure = 1024
 
 # Initialise UInput device
 cap = {

@@ -18,3 +18,38 @@ days, so it may be unstable.
 For the USB app, plug in the device and run the app. If you get timeout errors see the bugs below.
 
 For bluetooth, it should scan for your device so simply running it should work.  If not, run blue.py with a specific address (e.g., ./blue.py 00:00:00:00:00:00) which you can discover using "hcitool scan".
+
+# Installation
+
+Not sure what of this was required, but:
+
+```
+sudo apt-get install \
+  libevdev-dev
+  libusb1.0-0-dev 
+  libbluetooth-dev
+  xserver-xorg-input-evdev
+  libinput
+  libinput-tools
+  xinput
+  evtest
+```
+
+```
+sudo pip3 install --user \
+  pybluez
+  pyusb
+  evdev
+```
+
+then create `/etc/X11/xorg.conf.d/50-tablet.rules` with content:
+
+```
+Section "InputClass"
+        Identifier "Boogie Sync BT stylus"
+        MatchProduct "boogie-board-sync-pen"
+        Driver "evdev"
+EndSection
+```
+
+and reboot
