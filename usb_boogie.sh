@@ -17,12 +17,12 @@ function exit_handler() {
 
 #set -x
 whoami
-nohup python3 /home/marc/LinuxSystemFiles/boogie/boogiesync-tablet/blue.py > /tmp/boogie.log 2>&1 &
+nohup python3 /home/marc/LinuxSystemFiles/boogie/boogiesync-tablet/usb-driver.py > /tmp/boogie.log 2>&1 &
 PID=$!
 trap "exit_handler '${PID}'" SIGINT EXIT
 sleep 5
 # map to the LH monitor only
-#IDNUM=$(xinput | grep boogie | cut -d '=' -f 2 | cut -d '	' -f 1)   # not recognising the tab
+#IDNUM=$(xinput | grep boogie | cut -d '=' -f 2 | cut -d '	' -f 1)
 IDNUM=$(xinput | grep boogie | awk '{ print $4 }' | cut -d '=' -f 2)
 #echo "device id is ${IDNUM}"
 if [ ! -z ${IDNUM} ]; then
